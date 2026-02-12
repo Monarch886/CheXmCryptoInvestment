@@ -1,0 +1,51 @@
+plugins {
+    id 'org.springframework.boot' version "${springBootVersion}" apply false
+    id 'io.spring.dependency-management' version "${springDependencyManagementPlugin}" apply false
+
+}
+
+group = 'kz.che.xm.crypto'
+version = System.getProperty('version') ?: '1.0.0-SNAPSHOT'
+
+subprojects {
+    apply plugin: 'java-library'
+
+    repositories {
+        mavenCentral()
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+    }
+
+    dependencies {
+        implementation(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))
+        implementation("org.apache.commons:commons-lang3:$langVersion")
+        implementation("org.springframework:spring-web")
+        implementation("org.springframework:spring-context")
+        annotationProcessor(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))
+
+        api("org.slf4j:slf4j-api")
+        compileOnly("org.projectlombok:lombok")
+        annotationProcessor("org.projectlombok:lombok")
+
+        testImplementation("org.junit.jupiter:junit-jupiter:$jUnitVersion")
+        testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
+        testImplementation("org.junit.jupiter:junit-jupiter-params:$jUnitVersion")
+        testImplementation("org.junit.platform:junit-platform-commons:$jUnitPlatformVersion")
+        testImplementation("org.junit.platform:junit-platform-launcher:$jUnitPlatformVersion")
+        testImplementation("org.mockito:mockito-junit-jupiter:$mockitoVersion")
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
+        testImplementation(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))
+
+        testCompileOnly("org.projectlombok:lombok")
+        testAnnotationProcessor("org.projectlombok:lombok")
+        testAnnotationProcessor(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))
+
+        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}

@@ -1,0 +1,10 @@
+rootProject.name = 'XmCryptoInvestment'
+
+include 'infrastructure', 'domain', 'dao', "usecase", 'controller', 'client'
+
+project(':infrastructure').projectDir = file 'modules/infrastructure'
+project(':domain').projectDir = file 'modules/domain'
+project(':dao').projectDir = file 'modules/dao'
+project(':usecase').projectDir = file 'modules/usecase'
+project(':controller').projectDir = file 'modules/controller'
+project(':client').projectDir = file 'modules/client'

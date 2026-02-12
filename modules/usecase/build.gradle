@@ -1,0 +1,23 @@
+group = 'kz.che.xm.crypto'
+
+repositories {
+    mavenCentral()
+}
+
+tasks.named("jar") { enabled = true }
+
+dependencies {
+    implementation(project(':domain'))
+    implementation(project(':dao'))
+    implementation(project(':client'))
+
+    implementation("org.mapstruct:mapstruct:$mapstructVersion")
+    implementation("org.springframework.boot:spring-boot-starter-cache")
+
+    annotationProcessor("org.mapstruct:mapstruct-processor:$mapstructVersion")
+    annotationProcessor("org.projectlombok:lombok-mapstruct-binding:$mapstructBindingVersion")
+}
+
+test {
+    useJUnitPlatform()
+}

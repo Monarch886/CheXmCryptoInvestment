@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group = 'kz.che.xm.crypto'
+
+tasks.named("jar") { enabled = true }
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    annotationProcessor("org.projectlombok:lombok:$lombokVersion")
+    annotationProcessor("org.projectlombok:lombok-mapstruct-binding:$mapstructBindingVersion")
+
+    compileOnly("org.projectlombok:lombok:$lombokVersion")
+}
+
+test {
+    useJUnitPlatform()
+}

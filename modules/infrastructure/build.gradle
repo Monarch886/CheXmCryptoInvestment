@@ -1,0 +1,63 @@
+plugins {
+    id 'org.springframework.boot' version "$springBootVersion"
+    id 'io.spring.dependency-management' version "$springDependencyManagementPlugin"
+    id 'java'
+    id "org.flywaydb.flyway" version "$flywayVersion"
+}
+
+allprojects {
+    group = 'kz.che.xm.crypto'
+    version = "$projectVersion"
+}
+
+repositories {
+    mavenCentral()
+}
+
+tasks.named("bootJar") {
+    archiveBaseName.set("xm-crypto-investment")
+    archiveVersion.set(project.version.toString())
+}
+
+springBoot {
+    mainClass = 'kz.che.xm.crypto.XmCryptoInvestmentApp'
+}
+
+tasks.named("jar") {
+    enabled = false
+}
+
+dependencies {
+    implementation(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))
+    annotationProcessor(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))
+    testImplementation(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))
+
+    implementation(project(':domain'))
+    implementation(project(':usecase'))
+    implementation(project(':dao'))
+    implementation(project(':client'))
+    implementation(project(':controller'))
+
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation("org.springframework.boot:spring-boot-starter-cache")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocVersion")
+    implementation("org.flywaydb:flyway-core:$flywayVersion")
+
+    annotationProcessor("org.mapstruct:mapstruct-processor:$mapstructVersion")
+    annotationProcessor("org.projectlombok:lombok-mapstruct-binding:$mapstructBindingVersion")
+
+    compileOnly("org.projectlombok:lombok")
+    runtimeOnly("org.postgresql:postgresql")
+    runtimeOnly("org.flywaydb:flyway-database-postgresql:$flyWayPostgresSqlVersion")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
+    }
+}

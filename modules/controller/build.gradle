@@ -1,0 +1,25 @@
+group = 'kz.che.xm.crypto'
+
+tasks.named("jar") { enabled = true }
+
+dependencies {
+    implementation project(':domain')
+    implementation project(':client')
+    implementation project(':usecase')
+    implementation "org.mapstruct:mapstruct:$mapstructVersion"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "io.swagger.core.v3:swagger-annotations:$swaggerAnnotationsVersion"
+    implementation "javax.validation:validation-api:$validationVersion"
+
+    compileOnly("org.projectlombok:lombok:$lombokVersion")
+
+    annotationProcessor("org.projectlombok:lombok:$lombokVersion")
+    annotationProcessor("org.mapstruct:mapstruct-processor:$mapstructVersion")
+    annotationProcessor("org.projectlombok:lombok-mapstruct-binding:$mapstructBindingVersion")
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+
+    testCompileOnly("org.projectlombok:lombok:$lombokVersion")
+
+    testAnnotationProcessor("org.projectlombok:lombok:$lombokVersion")
+}

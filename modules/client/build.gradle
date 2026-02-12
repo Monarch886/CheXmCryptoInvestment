@@ -1,0 +1,17 @@
+group = 'kz.che.xm.crypto'
+
+repositories {
+    mavenCentral()
+}
+
+tasks.named("jar") { enabled = true }
+
+dependencies {
+    implementation("io.swagger.core.v3:swagger-annotations:$swaggerAnnotationsVersion")
+    implementation("tools.jackson.core:jackson-core:$jacksonVersion")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:$jacksonAnnotationsVersion")
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+app:
+  data:
+    dir: ${APP_DATA_DIR:/data}
+
+spring:
+  application:
+    name: xm-crypto-investment
+  datasource:
+    url: ${DB_HOST:jdbc:postgresql://localhost:5432}/${DB_NAME:crypto_db}
+    username: ${DB_USER:user}
+    password: ${DB_PASS:pass}
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASS:pass}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+
+springdoc:
+  auth:
+    auth-header-enabled: true
+openapi:
+  service:
+    title: XM CryptoInvestment API
+    url: ${SERVER_URL:http://localhost:8080}

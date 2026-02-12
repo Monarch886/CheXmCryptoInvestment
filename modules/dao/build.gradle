@@ -1,0 +1,30 @@
+group = 'kz.che.xm.crypto'
+version = '1.0.0-SNAPSHOT'
+
+tasks.named("jar") { enabled = true }
+
+dependencies {
+    implementation(project(':domain'))
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.flywaydb:flyway-core:$flywayVersion")
+
+    runtimeOnly("org.postgresql:postgresql")
+
+    annotationProcessor("org.hibernate:hibernate-jpamodelgen:$jpaModelgenVersion")
+    annotationProcessor("org.mapstruct:mapstruct-processor:$mapstructVersion")
+    annotationProcessor("org.projectlombok:lombok:$lombokVersion")
+    annotationProcessor("org.projectlombok:lombok-mapstruct-binding:$mapstructBindingVersion")
+
+    compileOnly("org.projectlombok:lombok:$lombokVersion")
+
+    testRuntimeOnly("com.h2database:h2")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    testCompileOnly("org.projectlombok:lombok:$lombokVersion")
+    testAnnotationProcessor("org.projectlombok:lombok:$lombokVersion")
+    testAnnotationProcessor("org.mapstruct:mapstruct-processor:$mapstructVersion")
+}
+
+test {
+    useJUnitPlatform()
+}
