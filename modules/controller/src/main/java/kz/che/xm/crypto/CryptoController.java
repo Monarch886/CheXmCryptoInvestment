@@ -91,7 +91,7 @@ public class CryptoController {
                 .currency(currencyMapper.toDto(usecase.getTop(
                         CryptoSearchRequest.builder()
                                 .dateFrom(date)
-                                .dateTo(date.withDayOfMonth(2))
+                                .dateTo(date.plusDays(1))
                                 .build())))
                 .build()
         );
